@@ -1,5 +1,5 @@
 terraform {
-  backend "local"
+  backend "local" {}
   
   # backend "s3" {
   #   bucket         = "myorg-terraform-environmentname"
