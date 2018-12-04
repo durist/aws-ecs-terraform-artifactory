@@ -1,0 +1,2 @@
+- Test shared 
+- Replace cloudfare with Route53 for DNS
