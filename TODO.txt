@@ -1,2 +1,6 @@
-- Test shared 
+* SHARED
+- Test shared
+
+* SERVICE
+- Figure out ALB cert
 - Replace cloudfare with Route53 for DNS
