@@ -243,6 +243,14 @@ resource "aws_db_subnet_group" "db_subnet_group" {
 }
 
 /*
+ * Create EFS volume
+ */
+resource "aws_efs_file_system" "efs_vol" {
+#  encrypted  = "true"
+}
+
+
+/*
  * Generate user_data from template file
  */
 data "template_file" "user_data" {
@@ -250,6 +258,7 @@ data "template_file" "user_data" {
 
   vars {
     ecs_cluster_name = "${aws_ecs_cluster.ecs_cluster.name}"
+    efs_dnsname = "${aws_efs_file_system.efs_vol.dns_name}"
   }
 }
 
