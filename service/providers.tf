@@ -4,7 +4,7 @@ provider "aws" {
   # secret_key = "${var.aws_secret_access_key}"
 }
 
-provider "cloudflare" {
-  email = "${var.cloudflare_email}"
-  token = "${var.cloudflare_token}"
-}
+# provider "cloudflare" {
+#   email = "${var.cloudflare_email}"
+#   token = "${var.cloudflare_token}"
+# }

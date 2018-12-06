@@ -5,10 +5,10 @@ resource "aws_db_instance" "db_instance" {
   engine                 = "mariadb"
   allocated_storage      = "8"
   instance_class         = "db.t2.micro"
-  name                   = "mydatabase"
-  identifier             = "mydatabase"
-  username               = "dbuser"
-  password               = "dbpass1234"
+  name                   = "${var.db_name}"
+  identifier             = "${var.db_name}"
+  username               = "${var.db_user}"
+  password               = "${var.db_passwd}"
   db_subnet_group_name   = "${data.terraform_remote_state.shared.db_subnet_group_name}"
   vpc_security_group_ids = ["${data.terraform_remote_state.shared.vpc_default_sg_id}"]
   skip_final_snapshot    = true
@@ -111,7 +111,7 @@ resource "aws_ecs_service" "service" {
   deployment_maximum_percent         = "200"
   deployment_minimum_healthy_percent = "50"
 
-  placement_strategy {
+  ordered_placement_strategy {
     type  = "spread"
     field = "instanceId"
   }
@@ -128,10 +128,10 @@ resource "aws_ecs_service" "service" {
 /*
  * Create Cloudflare DNS record
  */
-resource "cloudflare_record" "pmadns" {
-  domain  = "${var.cloudflare_domain}"
-  name    = "pma"
-  value   = "${aws_alb.alb.dns_name}"
-  type    = "CNAME"
-  proxied = true
-}
+# resource "cloudflare_record" "pmadns" {
+#   domain  = "${var.cloudflare_domain}"
+#   name    = "pma"
+#   value   = "${aws_alb.alb.dns_name}"
+#   type    = "CNAME"
+#   proxied = true
+# }
